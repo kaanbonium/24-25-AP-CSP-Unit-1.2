@@ -14,6 +14,7 @@ spot_color = "pink"
 spot_size = 2
 spot_shape = 'circle'
 font_setup = ("Arial", 20, "normal")
+colors = ["red", "blue", "green", "yellow"]
 #-----initialize turtle-----
 spot = trtl.Turtle()
 spot.shape(spot_shape)
@@ -27,7 +28,7 @@ score_writer.hideturtle()
 score_writer.goto(-375, 275)
 score_writer.pendown()
 #the timer
-timer = 5
+timer = 30
 counter_interval = 1000   #1000 represents 1 second
 timer_up = False
 #countdown variable
@@ -38,6 +39,7 @@ counter.penup()
 counter.goto(-375, 300)
 counter.pendown()
 #-----game functions--------
+
 def countdown():
   global timer, timer_up
   counter.clear()
@@ -58,6 +60,7 @@ def update_score():
 
 
 def change_position():
+    spot.speed(0)
     new_xpos = rand.randint(0, 400)
     new_ypos = rand.randint(0, 300)
     spot.penup()
@@ -65,10 +68,12 @@ def change_position():
     spot.pendown()
 
 def spot_clicked(x, y):
-    global timer_up
+    global timer_up, spot_color, randint
+    spot_color = rand.randint(colors)
     if timer_up == False:
-        update_score()
-        change_position()
+        for numbers in range(1000):
+            update_score()
+            change_position()
 
     else:
         spot.hideturtle()
@@ -78,5 +83,6 @@ def spot_clicked(x, y):
 #-----events----------------
 spot.onclick(spot_clicked)
 wn = trtl.Screen()
+wn.bgcolor('gray')
 wn.ontimer(countdown, counter_interval)
 wn.mainloop()
