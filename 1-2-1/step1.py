@@ -1,9 +1,3 @@
-'''
-randint(start, end)
-choice(list)
-'''
-
-
 # a121_catch_a_turtle.py
 #-----import statements-----
 import turtle as trtl
@@ -60,7 +54,7 @@ def update_score():
 
 
 def change_position():
-    spot.speed(5)
+    spot.speed(0)
     new_xpos = rand.randint(0, 400)
     new_ypos = rand.randint(0, 300)
     spot.penup()
