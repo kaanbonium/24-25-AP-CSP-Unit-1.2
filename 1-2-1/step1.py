@@ -60,7 +60,7 @@ def update_score():
 
 
 def change_position():
-    spot.speed(0)
+    spot.speed(5)
     new_xpos = rand.randint(0, 400)
     new_ypos = rand.randint(0, 300)
     spot.penup()
@@ -68,12 +68,10 @@ def change_position():
     spot.pendown()
 
 def spot_clicked(x, y):
-    global timer_up, spot_color, randint
-    spot_color = rand.randint(colors)
+    global timer_up
     if timer_up == False:
-        for numbers in range(1000):
-            update_score()
-            change_position()
+        update_score()
+        change_position()
 
     else:
         spot.hideturtle()
