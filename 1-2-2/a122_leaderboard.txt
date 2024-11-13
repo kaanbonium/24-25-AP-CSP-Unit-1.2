@@ -1,5 +1,5 @@
-Jojo,7
-Zack,6
-Jack,5
-Andrew,4
-Jill,3
+Jojo,35
+Violet,33
+Coolgamer_69,31
+Andrew,28
+Pilt,25
