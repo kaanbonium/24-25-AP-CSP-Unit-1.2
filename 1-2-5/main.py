@@ -1,18 +1,25 @@
 # Pong Game
 
 import turtle
-import random as rand
+
+
 wn = turtle.Screen()
 turtle.Screen().bgcolor('black')
 font_setup = ("Roboto" ,50, "normal")
 
 turtle.penup()
-turtle.shape("circle")
-turtle.color("white")
 turtle.shapesize(1)
+turtle.shape("square")
+turtle.color("white")
+
 turtle.goto(100,100)
 
+paddle_image = "paddle1.gif"
+paddle = turtle.Turtle()
+wn.addshape(paddle_image)
 
+def draw_paddle():
+    
 
 
 
@@ -78,5 +85,4 @@ def player_2_score():
 
 
 
-wn.on
 wn.mainloop()
