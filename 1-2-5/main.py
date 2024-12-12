@@ -2,24 +2,34 @@
 
 import turtle
 
-
+import random as rand
+wall_barrier1 = (451,0)
+wall_barrier2 = (-451,0)
 wn = turtle.Screen()
 turtle.Screen().bgcolor('black')
 font_setup = ("Roboto" ,50, "normal")
-
+wn.screensize(1,1)
 turtle.penup()
 turtle.shapesize(1)
+turtle.speed("slowest")
 turtle.shape("square")
 turtle.color("white")
 
-turtle.goto(100,100)
+'''
 
+    
+
+while turtle touch wall = False:
+    turtle.goto(rand.randint(0,-300),rand.randint(0,300))
+'''
 paddle_image = "paddle1.gif"
 paddle = turtle.Turtle()
+paddle.hideturtle()
 wn.addshape(paddle_image)
 
+'''
 def draw_paddle():
-    
+'''
 
 
 
@@ -41,48 +51,35 @@ score2.write("0", font=font_setup)
 
 
 
-def player_1_score():
+def update_player_1_score():
     '''
-    if ball goes into zone:
+    if ball touch_wall:
     score.clear()
     score += 1
     print(score)
     '''
 
-def player_2_score():
+def update_player_2_score():
     '''
-    if ball goes into zone:
+    if ball touch_wall:
     score2.clear()
     score2 += 1
     print(score2)
     '''
 
+letter_w = "w"
+letter_s = "s"
+letter_i = "i"
+letter_k = "k"
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+'''
+wn.onkeypress(letter_w, w)
+wn.onkeypress(letter_s, s)
+wn.onkeypress(letter_i, "Up")
+wn.onkeypress(letter_k, "Down")
+'''
+wn.listen()
 wn.mainloop()
