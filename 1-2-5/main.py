@@ -1,85 +1,109 @@
-# Pong Game
-
 import turtle
 
-import random as rand
-wall_barrier1 = (451,0)
-wall_barrier2 = (-451,0)
+
+# Setup game window
 wn = turtle.Screen()
-turtle.Screen().bgcolor('black')
-font_setup = ("Roboto" ,50, "normal")
-wn.screensize(1,1)
-turtle.penup()
-turtle.shapesize(1)
-turtle.speed("slowest")
-turtle.shape("square")
-turtle.color("white")
+wn.bgcolor("black")
+wn.setup(width=900, height=690)
+wn.tracer(0)
+font_setup = ("Arial", 24, "normal")
+# paddle 1
+paddle_a = turtle.Turtle()
+paddle_a.shape("square")
+paddle_a.color("white")
+paddle_a.shapesize(stretch_wid=6, stretch_len=.9)
+paddle_a.penup()
+paddle_a.goto(-400, 0)
 
-'''
+# paddle 2
+paddle_b = turtle.Turtle()
+paddle_b.shape("square")
+paddle_b.color("white")
+paddle_b.shapesize(stretch_wid=6, stretch_len=.9)
+paddle_b.penup()
+paddle_b.goto(400, 0)
 
-    
+# Ball
+ball = turtle.Turtle()
+ball.shape("circle")
+ball.color("white")
+ball.penup()
+ball.goto(0, 0)
+ball_speed_x = .30
+ball_speed_y = .30
+ball.color("red")
 
-while turtle touch wall = False:
-    turtle.goto(rand.randint(0,-300),rand.randint(0,300))
-'''
-paddle_image = "paddle1.gif"
-paddle = turtle.Turtle()
-paddle.hideturtle()
-wn.addshape(paddle_image)
+# scores
+score_a = 0
+score_b = 0
 
-'''
-def draw_paddle():
-'''
+# Display scores
+score_display = turtle.Turtle()
+score_display.color("white")
+score_display.penup()
+score_display.hideturtle()
+score_display.goto(0, 300)
+score_display.write("Player A: 0  Player B: 0", align="center", font=font_setup)
 
+# Update score display
+def update_score():
+    score_display.clear()
+    score_display.write(f"Player A: {score_a}  Player B: {score_b}", align="center", font=font_setup)
 
+# Move Paddle A up
+def paddle_a_up():
+    if paddle_a.ycor() < 300:
+        paddle_a.sety(paddle_a.ycor() + 30)
 
-score = turtle.Turtle()
-score.hideturtle()
-score.speed(0)
-score.color('white')
-score.penup()
-score.goto(200, 312)
-score.write("0", font=font_setup)
-score2 = turtle.Turtle()
-score2.hideturtle()
-score2.speed(0)
-score2.color('white')
-score2.penup()
-score2.goto(-200, 312)
-score2.pendown()
-score2.write("0", font=font_setup)
+# Move Paddle A down
+def paddle_a_down():
+    if paddle_a.ycor() > -300:
+        paddle_a.sety(paddle_a.ycor() - 30)
 
+# Move Paddle B up
+def paddle_b_up():
+    if paddle_b.ycor() < 300:
+        paddle_b.sety(paddle_b.ycor() + 30)
 
+# Move Paddle B down
+def paddle_b_down():
+    if paddle_b.ycor() > -300:
+        paddle_b.sety(paddle_b.ycor() - 30)
 
-def update_player_1_score():
-    '''
-    if ball touch_wall:
-    score.clear()
-    score += 1
-    print(score)
-    '''
-
-def update_player_2_score():
-    '''
-    if ball touch_wall:
-    score2.clear()
-    score2 += 1
-    print(score2)
-    '''
-
-letter_w = "w"
-letter_s = "s"
-letter_i = "i"
-letter_k = "k"
-
-
-
-
-'''
-wn.onkeypress(letter_w, w)
-wn.onkeypress(letter_s, s)
-wn.onkeypress(letter_i, "Up")
-wn.onkeypress(letter_k, "Down")
-'''
+# Keyboard controls
 wn.listen()
-wn.mainloop()
+wn.onkeypress(paddle_a_up, "w")
+wn.onkeypress(paddle_a_down, "s")
+wn.onkeypress(paddle_b_up, "i")
+wn.onkeypress(paddle_b_down, "k")
+
+# Main game loop
+while True:
+    wn.update()
+    # Move ball
+    ball.setx(ball.xcor() + ball_speed_x )
+    ball.sety(ball.ycor() + ball_speed_y)
+
+    # Ball bounce off paddles
+    if (ball.xcor() > 380 and paddle_b.ycor() - 50 < ball.ycor() < paddle_b.ycor() + 50):
+        ball_speed_x *= -1
+    if (ball.xcor() < -380 and paddle_a.ycor() - 50 < ball.ycor() < paddle_a.ycor() + 50):
+        ball_speed_x *= -1
+
+    # Ball bounces top and bottom walls
+    if ball.ycor() > 340 or ball.ycor() < -340:
+        ball_speed_y *= -1
+
+
+    # If ball goes out of bounds
+    if ball.xcor() > 450:
+        ball.goto(0, 0)
+        ball_speed_x *= -1
+        score_a += 1
+        update_score()
+
+    if ball.xcor() < -450:
+        ball.goto(0, 0)
+        ball_speed_x *= -1
+        score_b += 1
+        update_score()
