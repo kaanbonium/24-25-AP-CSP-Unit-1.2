@@ -1,12 +1,12 @@
 import turtle
 
-
 # Setup game window
 wn = turtle.Screen()
 wn.bgcolor("black")
 wn.setup(width=900, height=690)
 wn.tracer(0)
 font_setup = ("Arial", 24, "normal")
+
 # paddle 1
 paddle_a = turtle.Turtle()
 paddle_a.shape("square")
@@ -29,8 +29,8 @@ ball.shape("circle")
 ball.color("white")
 ball.penup()
 ball.goto(0, 0)
-ball_speed_x = .30
-ball_speed_y = .30
+ball_speed_x = .30  # Speed remains constant
+ball_speed_y = .30  # Speed remains constant
 ball.color("red")
 
 # scores
@@ -50,27 +50,27 @@ def update_score():
     score_display.clear()
     score_display.write(f"Player A: {score_a}  Player B: {score_b}", align="center", font=font_setup)
 
-# Move Paddle A up
+# Move paddle a up
 def paddle_a_up():
     if paddle_a.ycor() < 300:
         paddle_a.sety(paddle_a.ycor() + 30)
 
-# Move Paddle A down
+# Move paddle a down
 def paddle_a_down():
     if paddle_a.ycor() > -300:
         paddle_a.sety(paddle_a.ycor() - 30)
 
-# Move Paddle B up
+# Move paddle b up
 def paddle_b_up():
     if paddle_b.ycor() < 300:
         paddle_b.sety(paddle_b.ycor() + 30)
 
-# Move Paddle B down
+# Move paddle b down
 def paddle_b_down():
     if paddle_b.ycor() > -300:
         paddle_b.sety(paddle_b.ycor() - 30)
 
-# Keyboard controls
+# controls
 wn.listen()
 wn.onkeypress(paddle_a_up, "w")
 wn.onkeypress(paddle_a_down, "s")
@@ -81,19 +81,18 @@ wn.onkeypress(paddle_b_down, "k")
 while True:
     wn.update()
     # Move ball
-    ball.setx(ball.xcor() + ball_speed_x )
+    ball.setx(ball.xcor() + ball_speed_x)
     ball.sety(ball.ycor() + ball_speed_y)
 
     # Ball bounce off paddles
     if (ball.xcor() > 380 and paddle_b.ycor() - 50 < ball.ycor() < paddle_b.ycor() + 50):
-        ball_speed_x *= -1
+        ball_speed_x *= -1 # Speed of ball gets reflected
     if (ball.xcor() < -380 and paddle_a.ycor() - 50 < ball.ycor() < paddle_a.ycor() + 50):
-        ball_speed_x *= -1
+        ball_speed_x *= -1 # Reflected again
 
     # Ball bounces top and bottom walls
     if ball.ycor() > 340 or ball.ycor() < -340:
         ball_speed_y *= -1
-
 
     # If ball goes out of bounds
     if ball.xcor() > 450:
