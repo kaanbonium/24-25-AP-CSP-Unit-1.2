@@ -10,7 +10,7 @@ font_setup = ("Arial", 24, "normal")
 # paddle 1
 paddle_a = turtle.Turtle()
 paddle_a.shape("square")
-paddle_a.color("white")
+paddle_a.color("red")
 paddle_a.shapesize(stretch_wid=6, stretch_len=.9)
 paddle_a.penup()
 paddle_a.goto(-400, 0)
@@ -18,7 +18,7 @@ paddle_a.goto(-400, 0)
 # paddle 2
 paddle_b = turtle.Turtle()
 paddle_b.shape("square")
-paddle_b.color("white")
+paddle_b.color("blue")
 paddle_b.shapesize(stretch_wid=6, stretch_len=.9)
 paddle_b.penup()
 paddle_b.goto(400, 0)
@@ -31,7 +31,7 @@ ball.penup()
 ball.goto(0, 0)
 ball_speed_x = .30  # Speed remains constant
 ball_speed_y = .30  # Speed remains constant
-ball.color("red")
+ball.color("green")
 
 # scores
 score_a = 0
@@ -53,22 +53,22 @@ def update_score():
 # Move paddle a up
 def paddle_a_up():
     if paddle_a.ycor() < 300:
-        paddle_a.sety(paddle_a.ycor() + 30)
+        paddle_a.sety(paddle_a.ycor() + 40)
 
 # Move paddle a down
 def paddle_a_down():
     if paddle_a.ycor() > -300:
-        paddle_a.sety(paddle_a.ycor() - 30)
+        paddle_a.sety(paddle_a.ycor() - 40)
 
 # Move paddle b up
 def paddle_b_up():
     if paddle_b.ycor() < 300:
-        paddle_b.sety(paddle_b.ycor() + 30)
+        paddle_b.sety(paddle_b.ycor() + 40)
 
 # Move paddle b down
 def paddle_b_down():
     if paddle_b.ycor() > -300:
-        paddle_b.sety(paddle_b.ycor() - 30)
+        paddle_b.sety(paddle_b.ycor() - 40)
 
 # controls
 wn.listen()
